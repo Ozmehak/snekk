@@ -3,26 +3,35 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-
-// GameStates
+// using _t for types
+// GameStates 
 typedef enum
 {
-   IDLE_STATE,
-   GAMEPLAY_STATE,
-   GAMEOVER_STATE,
-   HIGHSCORE_STATE,
-} gameplayStates;
+    IDLE_STATE,
+    PLAY_STATE,
+    PAUSE_STATE,
+    GAMEOVER_STATE,
+    HIGHSCORE_STATE,
+} gameState_t;
 
 // Gameplay Events
-typedef enum 
+typedef enum
 {
-  START_GAME_EVEMT,
-  MOVE_SNAKE_EVENT,
-  EAT_FRUIT_EVENT,
-  END_GAME_EVENT,
-} gameplayEvents;
+    START_GAME_EVEMT,
+    MOVE_SNAKE_EVENT,
+    EAT_FRUIT_EVENT,
+    PAUSE_GAME_EVENT,
+    RESUME_GAME_EVENT,
+    END_GAME_EVENT,
+    CALCULATE_SCORE_EVENT,
+} gameEvent_t;
 
+gameState_t state = IDLE_STATE;
 
+void changeGameState(gameState_t, nextGameState)
+{
+
+}
 
 int i, j, height = 40, width = 40;
 int gameover, score;
