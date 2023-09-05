@@ -5,7 +5,6 @@
 
 // Declaration = tells compiler something exists. in .h
 // Definition = what that something does. in .c
-// using _t for types
 // GameStates
 typedef enum
 {
@@ -14,7 +13,7 @@ typedef enum
     PAUSE_STATE,
     GAMEOVER_STATE,
     HIGHSCORE_STATE,
-} gameState_t;
+} game_state;
 
 // Gameplay Events
 typedef enum
@@ -26,13 +25,33 @@ typedef enum
     RESUME_GAME_EVENT,
     END_GAME_EVENT,
     CALCULATE_SCORE_EVENT,
-} gameEvent_t;
+} game_event;
 
-gameState_t state = IDLE_STATE;
+game_state state = IDLE_STATE;
 
-void changeGameState(gameState_t, nextGameState)
+void change_game_state(game_state, next_game_state)
 {
-    state = nextGameState;
+    state = next_game_state;
+}
+
+void handle_start()
+{
+    if (state == IDLE_STATE)
+    {
+        change_game_state(PLAY_STATE);
+    }
+}
+
+typedef void (*event_handler)();
+event_handler event_handlers[] = {[PLAY_STATE] = handle_start};
+
+void handle_event(game_event event)
+{
+    event_handler handler = event_handlers[event];
+    if (handler)
+    {
+        handler();
+    }
 }
 
 int main()
