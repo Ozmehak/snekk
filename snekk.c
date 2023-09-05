@@ -3,6 +3,9 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+
+// Declaration = tells compiler something exists. in .h
+// Definition = what that something does. in .c
 // using _t for types
 // GameStates 
 typedef enum
@@ -30,7 +33,7 @@ gameState_t state = IDLE_STATE;
 
 void changeGameState(gameState_t, nextGameState)
 {
-
+  state = nextGameState; 
 }
 
 int i, j, height = 40, width = 40;
