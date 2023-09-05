@@ -18,7 +18,7 @@ typedef enum
 // Gameplay Events
 typedef enum
 {
-    START_GAME_EVEMT,
+    START_GAME_EVENT,
     MOVE_SNAKE_EVENT,
     EAT_FRUIT_EVENT,
     PAUSE_GAME_EVENT,
@@ -43,7 +43,16 @@ void handle_start()
 }
 
 typedef void (*event_handler)();
-event_handler event_handlers[] = {[PLAY_STATE] = handle_start};
+
+#define EVENT_HANDLERS_SIZE 5
+
+event_handler event_handlers[EVENT_HANDLERS_SIZE + 1] = {[START_GAME_EVENT] = handle_start,
+                                                         [PAUSE_GAME_EVENT] = handle_pause,
+                                                         [EAT_FRUIT_EVENT] = handle_fruit,
+                                                         [MOVE_SNAKE_EVENT] = handle_movement,
+                                                         [END_GAME_EVENT] = handle_gameover,
+                                                         // \0
+                                                         NULL};
 
 void handle_event(game_event event)
 {
