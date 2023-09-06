@@ -18,7 +18,7 @@ typedef enum
 // Gameplay Events
 typedef enum
 {
-    START_GAME_EVEMT,
+    START_GAME_EVENT,
     MOVE_SNAKE_EVENT,
     EAT_FRUIT_EVENT,
     PAUSE_GAME_EVENT,
@@ -42,8 +42,47 @@ void handle_start()
     }
 }
 
+void handle_pause()
+{
+    if (state == PLAY_STATE)
+    {
+        change_game_state(PAUSE_STATE);
+    }
+    else if (state == PAUSE_STATE)
+    {
+        change_game_state(PLAY_STATE);
+    }
+}
+
+int handle_fruit()
+{
+  return score += 1;
+}
+
+void handle_movement()
+{
+    // call move snake function
+}
+
+int handle_gameover()
+{
+  // show highscore screen
+  return 0;
+}
+
 typedef void (*event_handler)();
-event_handler event_handlers[] = {[PLAY_STATE] = handle_start};
+
+#define EVENT_HANDLERS_SIZE 5
+// clang-format off
+event_handler event_handlers[EVENT_HANDLERS_SIZE] = 
+{
+  [START_GAME_EVENT] = handle_start,
+  [PAUSE_GAME_EVENT] = handle_pause,
+  [EAT_FRUIT_EVENT] = handle_fruit,
+  [MOVE_SNAKE_EVENT] = handle_movement,
+  [END_GAME_EVENT] = handle_gameover                                 
+};
+// clang-format on
 
 void handle_event(game_event event)
 {
