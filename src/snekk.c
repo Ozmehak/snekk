@@ -42,6 +42,22 @@ void handle_start()
     }
 }
 
+void handle_pause()
+{
+    if (state == PLAY_STATE)
+    {
+        change_game_state(PAUSE_STATE);
+    }
+    else if (state == PAUSE_STATE)
+    {
+        change_game_state(PLAY_STATE);
+    }
+}
+
+int handle_fruit()
+{
+  return score += 1;
+}
 typedef void (*event_handler)();
 
 #define EVENT_HANDLERS_SIZE 5
