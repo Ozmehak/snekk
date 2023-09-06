@@ -46,13 +46,13 @@ typedef void (*event_handler)();
 
 #define EVENT_HANDLERS_SIZE 5
 
-event_handler event_handlers[EVENT_HANDLERS_SIZE + 1] = {[START_GAME_EVENT] = handle_start,
-                                                         [PAUSE_GAME_EVENT] = handle_pause,
-                                                         [EAT_FRUIT_EVENT] = handle_fruit,
-                                                         [MOVE_SNAKE_EVENT] = handle_movement,
-                                                         [END_GAME_EVENT] = handle_gameover,
-                                                         // \0
-                                                         NULL};
+event_handler event_handlers[EVENT_HANDLERS_SIZE] = {
+  [START_GAME_EVENT] = handle_start,
+  [PAUSE_GAME_EVENT] = handle_pause,
+  [EAT_FRUIT_EVENT] = handle_fruit,
+  [MOVE_SNAKE_EVENT] = handle_movement,
+  [END_GAME_EVENT] = handle_gameover                                 
+   };
 
 void handle_event(game_event event)
 {
