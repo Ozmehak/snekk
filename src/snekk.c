@@ -80,7 +80,7 @@ typedef void (*event_handler)();
 
 #define EVENT_HANDLERS_SIZE 5
 // clang-format off
-event_handler event_handlers[EVENT_HANDLERS_SIZE] = 
+event_handler event_handlers[EVENT_HANDLERS_SIZE + 1] = 
 {
   [START_GAME_EVENT] = handle_start,
   [PAUSE_GAME_EVENT] = handle_pause,
@@ -107,9 +107,6 @@ int main()
         {
             case IDLE_STATE:
                 // do nothin
-                if ()
-                {
-                } /* if user presses x change to PLAY_STATE  */
                 break;
             case PLAY_STATE:
                 // main gameplay loop here
