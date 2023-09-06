@@ -54,20 +54,26 @@ void handle_pause()
     }
 }
 
-int handle_fruit()
+void handle_fruit()
 {
-  return score += 1;
+    // add to score
+    // add to snake
+    // new fruit
 }
+
 
 void handle_movement()
 {
     // call move snake function
 }
 
-int handle_gameover()
+void handle_gameover()
 {
+  if (state == PLAY_STATE)
+  {
+    change_game_state(GAMEOVER_STATE);
+  }
   // show highscore screen
-  return 0;
 }
 
 typedef void (*event_handler)();
