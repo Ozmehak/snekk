@@ -29,7 +29,7 @@ typedef enum
 
 game_state state = IDLE_STATE;
 
-void change_game_state(game_state, next_game_state)
+void change_game_state(game_state next_game_state)
 {
     state = next_game_state;
 }
@@ -61,7 +61,6 @@ void handle_fruit()
     // new fruit
 }
 
-
 void handle_movement()
 {
     // call move snake function
@@ -69,11 +68,11 @@ void handle_movement()
 
 void handle_gameover()
 {
-  if (state == PLAY_STATE)
-  {
-    change_game_state(GAMEOVER_STATE);
-  }
-  // show highscore screen
+    if (state == PLAY_STATE)
+    {
+        change_game_state(GAMEOVER_STATE);
+    }
+    // show highscore screen
 }
 
 typedef void (*event_handler)();
@@ -106,8 +105,16 @@ int main()
         switch (state)
         {
             case IDLE_STATE:
-                // do nothin
+                int time = 0;
+                do
+                {
+                    time++;
+                    printf("Idle state for: %d seconds\n", time);
+                    sleep(1);
+                } while (state == IDLE_STATE);
+
                 break;
+
             case PLAY_STATE:
                 // main gameplay loop here
                 //
