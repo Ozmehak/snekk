@@ -45,14 +45,16 @@ void handle_start()
 typedef void (*event_handler)();
 
 #define EVENT_HANDLERS_SIZE 5
-
-event_handler event_handlers[EVENT_HANDLERS_SIZE] = {
+// clang-format off
+event_handler event_handlers[EVENT_HANDLERS_SIZE] = 
+{
   [START_GAME_EVENT] = handle_start,
   [PAUSE_GAME_EVENT] = handle_pause,
   [EAT_FRUIT_EVENT] = handle_fruit,
   [MOVE_SNAKE_EVENT] = handle_movement,
   [END_GAME_EVENT] = handle_gameover                                 
-   };
+};
+// clang-format on
 
 void handle_event(game_event event)
 {
