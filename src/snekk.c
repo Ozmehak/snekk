@@ -58,6 +58,18 @@ int handle_fruit()
 {
   return score += 1;
 }
+
+void handle_movement()
+{
+    // call move snake function
+}
+
+int handle_gameover()
+{
+  // show highscore screen
+  return 0;
+}
+
 typedef void (*event_handler)();
 
 #define EVENT_HANDLERS_SIZE 5
