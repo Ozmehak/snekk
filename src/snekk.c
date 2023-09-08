@@ -1,7 +1,8 @@
-#include <ncurses.h>
+#include <curses.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <pthread.h>
 
 // Declaration = tells compiler something exists. in .h
 // Definition = what that something does. in .c
@@ -27,6 +28,14 @@ typedef enum
     CALCULATE_SCORE_EVENT,
 } game_event;
 
+int ch;
+
+void *check_keys(void *args){
+  while (1) {
+sleep(1)  ;
+  ch = getch();
+}
+};
 game_state state = IDLE_STATE;
 
 void change_game_state(game_state next_game_state)
@@ -35,8 +44,8 @@ void change_game_state(game_state next_game_state)
 }
 
 void handle_start()
-{
-    if (state == IDLE_STATE)
+{//getchar from ncurses lib
+    if (ch == KEY_LEFT && state == IDLE_STATE)
     {
         change_game_state(PLAY_STATE);
     }
@@ -99,37 +108,32 @@ void handle_event(game_event event)
 }
 
 int main()
+
 {
+  //nurses setup cbreak for passing through every key instead of lines
+
+  pthread_t key_thread;
+  pthread_create(&key_thread, NULL, check_keys, NULL);
+  initscr();
+  cbreak();
+  noecho();//getchar from ncurses lib
     while (1)
     {
         switch (state)
         {
             case IDLE_STATE:
                 int time = 0;
-                do
-                {
-                    time++;
-                    printf("Idle state for: %d seconds\n", time);
-                    sleep(1);
-                } while (state == IDLE_STATE);
-
+               printf("%d\n", ch); 
                 break;
 
             case PLAY_STATE:
                 // main gameplay loop here
-                //
+                printf("game is now in playstate%d\n", ch); 
                 break;
         }
+    sleep(1);
     }
-    // int m, n;
-    //
-    // // generate boundries
-    // setup();
-    //
-    // while (!gameover)
-    // {
-    //     draw();
-    //     input();
-    //     logic();
-    // }
-}
+  // remember mutex.
+  pthread_join(key_thread, NULL);
+
+    }
